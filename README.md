@@ -139,12 +139,6 @@ Download my-project with git
 <!-- Running Tests -->
 ### :test_tube: Running Tests
 
-To run tests, run the following command
-
-```bash
-  
-```
-
 <!-- Run Locally -->
 ### :running: Run Locally
 
@@ -177,11 +171,11 @@ Start the server
 ## :eyes: Usage
 
 
-1. Add a coupon:
-API Type: POST
-route: /api/coupons
-return value: 200 response code.
-considered coupon to be an alphanumeric string of length 10. this gives us 36^10 possibile codes, whereas if it was only number, the limit was the max int limit that an SQL column can take which is just 2,147,483,647.
+1. Add a coupon<br />
+API Type: POST<br />
+route: /api/coupons<br />
+return value: 200 response code.<br />
+considered coupon to be an alphanumeric string of length 10. this gives us 36^10 possibile codes, whereas if it was only number, the limit was the max int limit that an SQL column can take which is just 2,147,483,647.<br />
 ```json
 //Sample 1 cart wise coupon
 {
@@ -235,11 +229,11 @@ considered coupon to be an alphanumeric string of length 10. this gives us 36^10
 
 ```
 
-2. Get all coupons:
-API Type: GET
-route: /api/coupons
-Return Value: all couponsfrom the DB in json format.
-Return all coupons saved in the DB
+2. Get all coupons:<br />
+API Type: GET<br />
+route: /api/coupons<br />
+Return Value: all couponsfrom the DB in json format.<br />
+Return all coupons saved in the DB<br />
 
 ```json
 //RS 
@@ -298,9 +292,9 @@ Return all coupons saved in the DB
 ]
 ```
 
-3. Get a specifc coupon
-API Type - GET
-route - /api/coupons/coupon_code_here
+3. Get a specifc coupon<br />
+API Type - GET<br />
+route - /api/coupons/coupon_code_here<br />
 ```json
 //JSON Response 
 {
@@ -317,10 +311,10 @@ route - /api/coupons/coupon_code_here
 }
 ```
 
-4. Update Coupon
-API Type: PUT
-route: /api/coupons/<coupon_code>
-Request Body: (Partial update supported)
+4. Update Coupon<br />
+API Type: PUT<br />
+route: /api/coupons/<coupon_code><br />
+Request Body: (Partial update supported)<br />
 
 ```json
 {
@@ -332,7 +326,7 @@ Request Body: (Partial update supported)
     "is_active": false
 }
 ```
-Return Value: Updated coupon object
+Return Value: Updated coupon object<br />
 ```json
 {
     "code": "XYZ20",
@@ -348,10 +342,10 @@ Return Value: Updated coupon object
 }
 ```
 
-5. Get Applicable Coupons
-API Type: POST
-route: /api/applicable-coupons
-Request Body:
+5. Get Applicable Coupons<br />
+API Type: POST<br />
+route: /api/applicable-coupons<br />
+Request Body:<br />
 
 ```json
 {
@@ -364,7 +358,7 @@ Request Body:
     }
 }
 ```
-Return Value: JSON array of applicable coupons with their codes, types, and potential discounts
+Return Value: JSON array of applicable coupons with their codes, types, and potential discounts<br />
 ```json
 {
     "applicable_coupons": [
@@ -382,11 +376,10 @@ Return Value: JSON array of applicable coupons with their codes, types, and pote
 }
 ```
 
-6. Apply Coupon
-API Type: POST
-route: /api/apply-coupon/<coupon_code>
-Request Body:
-
+6. Apply Coupon<br />
+API Type: POST<br />
+route: /api/apply-coupon/<coupon_code><br />
+Request Body:<br />
 ```json
 {
     "cart": { 
@@ -398,7 +391,7 @@ Request Body:
     }
 }
 ```
-Return Value: Updated cart with applied discount
+Return Value: Updated cart with applied discount<br />
 ```json
 {
     "updated_cart": {
@@ -429,95 +422,93 @@ Contributions are always welcome!
 
 <!-- FAQ -->
 ## :grey_question: FAQ
+<br />
+* What types of coupons are supported?
 
-What types of coupons are supported?
+  - The API supports three types of coupons:
 
-The API supports three types of coupons:
-
-Cart-wise: Discount applied to the entire cart when a minimum threshold is met
-Product-wise: Discount applied to specific products
-Buy X Get Y (BXGY): Buy a certain quantity of products and get another product free
-
-
+       - Cart-wise: Discount applied to the entire cart when a minimum threshold is met
+       - Product-wise: Discount applied to specific products
+       - Buy X Get Y (BXGY): Buy a certain quantity of products and get another product free
 
 
-How are coupon codes generated?
+<br />
 
-Coupon codes are alphanumeric strings of length 10
-This approach provides approximately 36^10 possible unique codes
-Significantly larger than traditional numeric coupon codes
+* How are coupon codes generated?
 
+- Coupon codes are alphanumeric strings of length 10
+- This approach provides approximately 36^10 possible unique codes
+- Significantly larger than traditional numeric coupon codes
 
-Can a coupon be applied multiple times?
+<br />
+* Can a coupon be applied multiple times?
 
-For BXGY type coupons, a repition_limit can be set to control how many times the coupon can be applied
+- For BXGY type coupons, a repition_limit can be set to control how many times the coupon can be applied<br />
 Other coupon types typically have their own validation rules in the CouponService
 
+<br />
+* How does the system handle coupon validation?
 
-How does the system handle coupon validation?
+- Coupons are validated based on:
 
-Coupons are validated based on:
+    - Coupon active status
+    - Matching product requirements
+    - Minimum cart value thresholds
+    - Quantity-based conditions for BXGY coupons
 
-Coupon active status
-Matching product requirements
-Minimum cart value thresholds
-Quantity-based conditions for BXGY coupons
+<br />
 
+* What happens if a coupon is not applicable?
 
-
-
-What happens if a coupon is not applicable?
-
-The /applicable-coupons endpoint will simply not include non-applicable coupons
+- The /applicable-coupons endpoint will simply not include non-applicable coupons<br />
 When trying to apply an invalid coupon, a specific CouponError will be raised
 
 
-Can I update an existing coupon?
+* Can I update an existing coupon?
 
-Yes, you can use the PUT method on /coupons/<coupon_code> to update coupon details
+- Yes, you can use the PUT method on /coupons/<coupon_code> to update coupon details <br />
 Partial updates are supported, meaning you don't need to provide all fields
 
 
-How are database errors handled?
+* How are database errors handled?
 
-The API includes specific error handlers for:
+- The API includes specific error handlers for:
 
-Validation errors
-Database errors
-Coupon-specific errors
-
-
-Errors are logged and returned with appropriate HTTP status codes
+    -   Validation errors
+    -   Database errors
+    -   Coupon-specific errors
 
 
-Is there a way to check the API's health?
+    Errors are logged and returned with appropriate HTTP status codes
+<br />
 
-Yes, use the /health endpoint to:
+* Is there a way to check the API's health?
 
-Check database connectivity
-Verify API responsiveness
-Get current timestamp
+- Yes, use the /health endpoint to:
 
-
-
-
-What are the future plans for this API?
-
-The roadmap mentions adding multi-coupon support
-Potential improvements could include more complex discount rules, expiration handling, and enhanced reporting
+- Check database connectivity
+- Verify API responsiveness
+- Get current timestamp
 
 
-How are coupons stored?
-
-Coupons are stored in a MySQL database
-Each coupon has fields like code, type, description, details, creation time, and active status
 
 
-Are there any limitations on coupon creation?
+* What are the future plans for this API?
 
-Coupon codes must be unique
-The system prevents creating a coupon with an existing code
-Detailed validation is performed using Marshmallow schemas
+- The roadmap mentions adding multi-coupon support
+- Potential improvements could include more complex discount rules, expiration handling, and enhanced reporting
+
+* How are coupons stored?
+
+- Coupons are stored in a MySQL database
+- Each coupon has fields like code, type, description, details, creation time, and active status
+
+
+* Are there any limitations on coupon creation?
+
+- Coupon codes must be unique
+- The system prevents creating a coupon with an existing code
+- Detailed validation is performed using Marshmallow schemas
 
 
 <!-- License -->
