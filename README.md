@@ -57,7 +57,8 @@
 - [Usage](#eyes-usage)
 - [Roadmap](#compass-roadmap)
 - [Contributing](#wave-contributing)
-
+- [FAQ](#FAQ)
+- [License](#License)
   
 
 <!-- About the Project -->
@@ -423,88 +424,82 @@ Contributions are always welcome!
 <!-- FAQ -->
 ## :grey_question: FAQ
 <br />
-* What types of coupons are supported?
+1] What types of coupons are supported?
 
-  - The API supports three types of coupons:
+A. The API supports three types of coupons:
 
-       - Cart-wise: Discount applied to the entire cart when a minimum threshold is met
-       - Product-wise: Discount applied to specific products
-       - Buy X Get Y (BXGY): Buy a certain quantity of products and get another product free
+- Cart-wise: Discount applied to the entire cart when a minimum threshold is met
+- Product-wise: Discount applied to specific products
+- Buy X Get Y (BXGY): Buy a certain quantity of products and get another product free
 
+
+
+<br />
+2] Can a coupon be applied multiple times?
+
+A. For BXGY type coupons, a repition_limit can be set to control how many times the coupon can be applied. Other coupon types typically have their own validation rules in the CouponService.
+
+<br />
+3] How are coupon codes generated?
+
+A. Coupon codes are alphanumeric strings of length 10<br />
+This approach provides approximately 36^10 possible unique codes
+<br />Significantly larger than traditional numeric coupon codes
+<br />
+
+4] How does the system handle coupon validation?
+
+A. Coupons are validated based on:
+
+- Coupon active status
+- Matching product requirements
+- Minimum cart value thresholds
+- Quantity-based conditions for BXGY coupons
 
 <br />
 
-* How are coupon codes generated?
+5] What happens if a coupon is not applicable?
 
-- Coupon codes are alphanumeric strings of length 10
-- This approach provides approximately 36^10 possible unique codes
-- Significantly larger than traditional numeric coupon codes
-
-<br />
-* Can a coupon be applied multiple times?
-
-- For BXGY type coupons, a repition_limit can be set to control how many times the coupon can be applied<br />
-Other coupon types typically have their own validation rules in the CouponService
-
-<br />
-* How does the system handle coupon validation?
-
-- Coupons are validated based on:
-
-    - Coupon active status
-    - Matching product requirements
-    - Minimum cart value thresholds
-    - Quantity-based conditions for BXGY coupons
-
-<br />
-
-* What happens if a coupon is not applicable?
-
-- The /applicable-coupons endpoint will simply not include non-applicable coupons<br />
+A. The /applicable-coupons endpoint will simply not include non-applicable coupons<br />
 When trying to apply an invalid coupon, a specific CouponError will be raised
 
 
-* Can I update an existing coupon?
+6] Can I update an existing coupon?
 
-- Yes, you can use the PUT method on /coupons/<coupon_code> to update coupon details <br />
+A. Yes, you can use the PUT method on /coupons/<coupon_code> to update coupon details <br />
 Partial updates are supported, meaning you don't need to provide all fields
 
 
-* How are database errors handled?
+7] How are database errors handled?
 
-- The API includes specific error handlers for:
+A. The API includes specific error handlers for:
 
-    -   Validation errors
-    -   Database errors
-    -   Coupon-specific errors
+-   Validation errors
+-   Database errors
+-   Coupon-specific errors
 
 
-    Errors are logged and returned with appropriate HTTP status codes
+Errors are logged and returned with appropriate HTTP status codes
 <br />
 
-* Is there a way to check the API's health?
+8] Is there a way to check the API's health?
 
-- Yes, use the /health endpoint to:
+A. Yes, use the /health endpoint to:
 
 - Check database connectivity
 - Verify API responsiveness
 - Get current timestamp
 
+9] What are the future plans for this API?
+
+A. The roadmap mentions adding multi-coupon support. Potential improvements could include more complex discount rules, expiration handling, and enhanced reporting
+
+10] How are coupons stored?
+
+A. Coupons are stored in a MySQL database. Each coupon has fields like code, type, description, details, creation time, and active status.
 
 
-
-* What are the future plans for this API?
-
-- The roadmap mentions adding multi-coupon support
-- Potential improvements could include more complex discount rules, expiration handling, and enhanced reporting
-
-* How are coupons stored?
-
-- Coupons are stored in a MySQL database
-- Each coupon has fields like code, type, description, details, creation time, and active status
-
-
-* Are there any limitations on coupon creation?
+11] Are there any limitations on coupon creation?
 
 - Coupon codes must be unique
 - The system prevents creating a coupon with an existing code
