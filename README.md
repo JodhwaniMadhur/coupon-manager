@@ -172,7 +172,7 @@ Start the server
 ## :eyes: Usage
 
 
-1. Add a coupon<br />
+### 1. Add a coupon<br />
 API Type: POST<br />
 route: /api/coupons<br />
 return value: 200 response code.<br />
@@ -230,7 +230,7 @@ considered coupon to be an alphanumeric string of length 10. this gives us 36^10
 
 ```
 
-2. Get all coupons:<br />
+### 2. Get all coupons:<br />
 API Type: GET<br />
 route: /api/coupons<br />
 Return Value: all couponsfrom the DB in json format.<br />
@@ -293,7 +293,7 @@ Return all coupons saved in the DB<br />
 ]
 ```
 
-3. Get a specifc coupon<br />
+### 3.  Get a specifc coupon<br />
 API Type - GET<br />
 route - /api/coupons/coupon_code_here<br />
 ```json
@@ -312,7 +312,7 @@ route - /api/coupons/coupon_code_here<br />
 }
 ```
 
-4. Update Coupon<br />
+### 4. Update Coupon<br />
 API Type: PUT<br />
 route: /api/coupons/<coupon_code><br />
 Request Body: (Partial update supported)<br />
@@ -343,7 +343,7 @@ Return Value: Updated coupon object<br />
 }
 ```
 
-5. Get Applicable Coupons<br />
+### 5. Get Applicable Coupons<br />
 API Type: POST<br />
 route: /api/applicable-coupons<br />
 Request Body:<br />
@@ -377,7 +377,7 @@ Return Value: JSON array of applicable coupons with their codes, types, and pote
 }
 ```
 
-6. Apply Coupon<br />
+### 6. Apply Coupon<br />
 API Type: POST<br />
 route: /api/apply-coupon/<coupon_code><br />
 Request Body:<br />
