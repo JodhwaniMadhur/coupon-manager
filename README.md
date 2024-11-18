@@ -57,8 +57,8 @@
 - [Usage](#eyes-usage)
 - [Roadmap](#compass-roadmap)
 - [Contributing](#wave-contributing)
-- [FAQ](#FAQ)
-- [License](#License)
+- [FAQ](#grey_question-faq)
+- [License](#warning-license)
   
 
 <!-- About the Project -->
