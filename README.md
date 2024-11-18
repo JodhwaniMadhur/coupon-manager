@@ -514,4 +514,4 @@ Partial updates are supported, meaning you don't need to provide all fields
 <!-- License -->
 ## :warning: License
 
-Distributed under the no License. See LICENSE.txt for more information.
+Distributed under the Apache License. See LICENSE file for more information.
